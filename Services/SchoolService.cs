@@ -15,14 +15,14 @@ namespace StudentApp.Services
 			this.School = school;
 		}
 
-		public Admin LogIn(string username, string password)
+		public Admin LogIn(string userName, string password)
 		{
             try
             {
 				var admin = new Admin();
-				if (this.School.Admin.Any(admin => admin.UserName.ToLower() == username.ToLower() && admin.Password == password))
+				if (this.School.Admin.Any(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password))
 				{
-					admin = this.School.Admin.Find(admin => admin.UserName.ToLower() == username.ToLower() && admin.Password == password);
+					admin = this.School.Admin.Find(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password);
 				}
 
 				return admin;

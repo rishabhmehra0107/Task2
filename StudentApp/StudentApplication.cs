@@ -65,7 +65,6 @@ namespace StudentApp
             File.WriteAllText(@"student.json", schoolResultJson);
 
             Console.WriteLine("Please provide admin details to setup");
-
             Admin admin = new Admin()
             {
                 Name = Utility.GetStringInput("^[a-zA-Z ]+$", "Enter Admin Name").ToUpper(),
@@ -219,6 +218,7 @@ namespace StudentApp
                 if (student != null)
                 {
                     Console.WriteLine("Student Roll Number : {0}\nStudent Name : {1}\nStudent Marks\n-------------", student.RollNumber, student.Name);
+
                     foreach(SubjectScore subject in student.SubjectsScores)
                     {
                         Console.WriteLine("Telugu : {0}\nHindi : {1}\nEnglish : {2}\nMaths : {3}\nScience : {4}\nSocial : {5}", subject.Telugu, subject.Hindi, subject.English, subject.Maths, subject.Science, subject.Social);
