@@ -6,7 +6,7 @@ namespace StudentApp.Model
     {
         public string Name { get; set; }
 
-        public double Age { get; set; }
+        public int Age { get; set; }
 
         public string Sex { get; set; }
 
