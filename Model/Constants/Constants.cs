@@ -3,9 +3,9 @@ namespace StudentApp.Model
 {
     public static class Constants
     {
-        public static double TotalMarks = 0;
+        public static double DefaultTotalMarks = 0;
 
-        public static double Percentage = 0;
+        public static double DefaultPercentage = 0;
 
         public enum MenuOption
         {

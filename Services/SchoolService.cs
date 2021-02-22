@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using StudentApp.Model;
 using static StudentApp.Model.Constants;
 
@@ -51,8 +52,8 @@ namespace StudentApp.Services
         {
             try
             {
-				student.TotalMarks = TotalMarks;
-				student.Percentage = Percentage;
+				student.TotalMarks = DefaultTotalMarks;
+				student.Percentage = DefaultPercentage;
 				this.School.Students.Add(student);
 
 				return true;
@@ -72,8 +73,8 @@ namespace StudentApp.Services
 					return false;
 
 				student.TotalMarks = totalMarks;
-				student.Percentage = totalMarks / 6;
-				student.SubjectsScore.Add(subjectScore);
+				student.Percentage = totalMarks / subjectScore.GetType().GetProperties().Count();
+				student.SubjectsScores.Add(subjectScore);
 
 				return true;
             }

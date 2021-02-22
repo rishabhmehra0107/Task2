@@ -7,7 +7,7 @@ namespace StudentApp.Model
     {
         public Student()
         {
-            this.SubjectsScore = new List<SubjectScore>();
+            this.SubjectsScores = new List<SubjectScore>();
         }
 
         public int RollNumber { get; set; }
@@ -16,6 +16,6 @@ namespace StudentApp.Model
 
         public double Percentage { get; set; }
 
-        public List<SubjectScore> SubjectsScore { get; set; }
+        public List<SubjectScore> SubjectsScores { get; set; }
     }
 }

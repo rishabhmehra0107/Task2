@@ -12,7 +12,7 @@ namespace StudentApp
 	{
         private SchoolService SchoolService { get; set; }
         public School School { get; set; }
-        public Admin LoggedInAdmin;
+        public Admin LoggedInUser;
 
         public StudentApplication()
         {
@@ -27,8 +27,7 @@ namespace StudentApp
 
             try
             {
-                int option = Convert.ToInt32(Console.ReadLine());
-                MenuOption menuOption = (MenuOption)option;
+                MenuOption menuOption = (MenuOption)Convert.ToInt32(Console.ReadLine());
                 switch (menuOption)
                 {
                     case MenuOption.Setup:
@@ -88,10 +87,10 @@ namespace StudentApp
             string userName = Utility.GetStringInput("^[a-zA-Z ]+$", "Enter Admin Username");
             string password = Utility.GetStringInput("^[a-zA-Z0-9]+$", "Enter Admin Password");
 
-            this.LoggedInAdmin = this.SchoolService.LogIn(userName, password);
+            this.LoggedInUser = this.SchoolService.LogIn(userName, password);
             try
             {
-                if (this.LoggedInAdmin == null)
+                if (this.LoggedInUser == null)
                 {
                     Console.WriteLine("Invalid Credentials");
                     this.SchoolLogin();
@@ -121,8 +120,7 @@ namespace StudentApp
             Console.WriteLine("1. Add student\n2. Add marks for student\n3. Show student progress card\n4. Logout");
             try
             {
-                int option = Convert.ToInt32(Console.ReadLine());
-                SchoolMenu schoolMenu = (SchoolMenu)option;
+                SchoolMenu schoolMenu = (SchoolMenu)Convert.ToInt32(Console.ReadLine());
                 switch (schoolMenu)
                 {
                     case SchoolMenu.AddStudent:
@@ -214,7 +212,7 @@ namespace StudentApp
                 if (student != null)
                 {
                     Console.WriteLine("Student Roll Number : {0}\nStudent Name : {1}\nStudent Marks\n-------------", student.RollNumber, student.Name);
-                    foreach(SubjectScore subject in student.SubjectsScore)
+                    foreach(SubjectScore subject in student.SubjectsScores)
                     {
                         Console.WriteLine("Telugu : {0}\nHindi : {1}\nEnglish : {2}\nMaths : {3}\nScience : {4}\nSocial : {5}", subject.Telugu, subject.Hindi, subject.English, subject.Maths, subject.Science, subject.Social);
                     }
@@ -230,12 +228,12 @@ namespace StudentApp
 
         public void Exit()
         {
-            Console.WriteLine("Goodbye ", this.LoggedInAdmin.Name);
+            Console.WriteLine("Goodbye ", this.LoggedInUser.Name);
 
             string schoolResultJson = JsonConvert.SerializeObject(this.School) + JsonConvert.SerializeObject(this.School.Admin) + JsonConvert.SerializeObject(this.School.Students);
             File.WriteAllText(@"student.json", schoolResultJson);
 
-            this.LoggedInAdmin = new Admin();
+            this.LoggedInUser = new Admin();
         }
     }
 }
