@@ -61,6 +61,8 @@ namespace StudentApp
             this.School.Location = Utility.GetStringInput("^[a-zA-Z ]+$", "Enter School Location");
             this.School.PinCode = Utility.GetStringInput("^[0-9]+$", "Enter School Pin Code");
             Console.WriteLine("School setup is completed.\nSchool Name: {0} , Location: {1} , PinCode: {2}", School.Name, School.Location, School.PinCode);
+            string schoolResultJson = JsonConvert.SerializeObject(this.School);
+            File.WriteAllText(@"student.json", schoolResultJson);
 
             Console.WriteLine("Please provide admin details to setup");
 
@@ -80,6 +82,8 @@ namespace StudentApp
                 Console.WriteLine("Error!");
 
             Console.WriteLine("School Name: {0}, Admin Name: {1}, Admin Username: {2}", this.School.Name, admin.Name, admin.UserName);
+            schoolResultJson = JsonConvert.SerializeObject(this.School) + JsonConvert.SerializeObject(this.School.Admin);
+            File.WriteAllText(@"student.json", schoolResultJson);
         }
 
         public void SchoolLogin()
@@ -140,6 +144,9 @@ namespace StudentApp
                         break;
 
                 }
+
+                string schoolResultJson = JsonConvert.SerializeObject(this.School) + JsonConvert.SerializeObject(this.School.Admin) + JsonConvert.SerializeObject(this.School.Students);
+                File.WriteAllText(@"student.json", schoolResultJson);
 
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
@@ -229,9 +236,6 @@ namespace StudentApp
         public void Exit()
         {
             Console.WriteLine("Goodbye ", this.LoggedInUser.Name);
-
-            string schoolResultJson = JsonConvert.SerializeObject(this.School) + JsonConvert.SerializeObject(this.School.Admin) + JsonConvert.SerializeObject(this.School.Students);
-            File.WriteAllText(@"student.json", schoolResultJson);
 
             this.LoggedInUser = new Admin();
         }
