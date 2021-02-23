@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using StudentApp.Model;
-using static StudentApp.Model.Constants;
 
 namespace StudentApp.Services
 {
@@ -20,9 +18,9 @@ namespace StudentApp.Services
             try
             {
 				var admin = new Admin();
-				if (this.School.Admin.Any(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password))
+				if (this.School.Admins.Any(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password))
 				{
-					admin = this.School.Admin.Find(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password);
+					admin = this.School.Admins.Find(admin => admin.UserName.ToLower() == userName.ToLower() && admin.Password == password);
 				}
 
 				return admin;
@@ -37,8 +35,8 @@ namespace StudentApp.Services
 		{
 			try
 			{
-				admin.Id = "Admin_"+this.School.Admin.Count + 1;
-				this.School.Admin.Add(admin);
+				admin.Id = "Admin_"+this.School.Admins.Count + 1;
+				this.School.Admins.Add(admin);
 
 				return true;
 			}
@@ -52,8 +50,6 @@ namespace StudentApp.Services
         {
             try
             {
-				student.TotalMarks = DefaultTotalMarks;
-				student.Percentage = DefaultPercentage;
 				this.School.Students.Add(student);
 
 				return true;
@@ -64,7 +60,7 @@ namespace StudentApp.Services
             }
         }
 
-		public bool AddScore(SubjectScore subjectScore, int rollNumber, double totalMarks)
+		public bool AddScore(Marks subjectScore, int rollNumber, double totalMarks)
         {
             try
             {
@@ -73,7 +69,6 @@ namespace StudentApp.Services
 					return false;
 
 				student.TotalMarks = totalMarks;
-				student.Percentage = totalMarks / subjectScore.GetType().GetProperties().Count();
 				student.SubjectsScores.Add(subjectScore);
 
 				return true;

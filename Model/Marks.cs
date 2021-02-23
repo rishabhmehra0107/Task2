@@ -1,7 +1,7 @@
 ﻿using System;
 namespace StudentApp.Model
 {
-    public class SubjectScore
+    public class Marks
     {
         public int Telugu { get; set; }
 

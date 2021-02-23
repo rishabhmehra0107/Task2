@@ -1,5 +1,4 @@
 ﻿using System;
-using static StudentApp.Model.Constants;
 namespace StudentApp.Model
 {
     public class User 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace StudentApp.Model
 {
@@ -7,7 +9,7 @@ namespace StudentApp.Model
     {
         public School()
         {
-            this.Admin = new List<Admin>();
+            this.Admins = new List<Admin>();
             this.Students = new List<Student>();
         }
 
@@ -17,8 +19,14 @@ namespace StudentApp.Model
 
         public string PinCode { get; set; }
 
-        public List<Admin> Admin { get; set; }
+        public List<Admin> Admins { get; set; }
 
         public List<Student> Students { get; set; }
+
+        public void UpdateSchoolJson(School school)
+        {
+            string schoolResultJson = JsonConvert.SerializeObject(school);
+            File.WriteAllText(@"student.json", schoolResultJson);
+        }
     }
 }

@@ -7,15 +7,13 @@ namespace StudentApp.Model
     {
         public Student()
         {
-            this.SubjectsScores = new List<SubjectScore>();
+            this.SubjectsScores = new List<Marks>();
         }
 
         public int RollNumber { get; set; }
 
         public double TotalMarks { get; set; }
 
-        public double Percentage { get; set; }
-
-        public List<SubjectScore> SubjectsScores { get; set; }
+        public List<Marks> SubjectsScores { get; set; }
     }
 }

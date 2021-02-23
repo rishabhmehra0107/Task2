@@ -9,7 +9,7 @@ namespace StudentApp.Services.Utilities
         {
             Console.WriteLine(helpText);
             var input = Console.ReadLine();
-            if (!string.IsNullOrEmpty(regex) && Regex.IsMatch(input, regex))
+            if (Regex.IsMatch(input, regex))
             {
                 return input;
             }
@@ -34,6 +34,7 @@ namespace StudentApp.Services.Utilities
             }
             catch (Exception)
             {
+                Console.Write("Invalid input. Please enter valid integer input.");
                 return GetIntInput(helpText);
             }
         }
